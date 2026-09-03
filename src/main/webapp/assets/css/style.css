@@ -438,3 +438,8 @@ tr:hover td {
 	position: relative;
 	z-index: 1;
 }
+
+.top-nav .nav-links .username-tag {
+	margin-left: 24px;
+	font-size: 14px;
+}

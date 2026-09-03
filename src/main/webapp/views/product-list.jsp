@@ -12,11 +12,18 @@
 <body>
 	<jsp:include page="/views/common/galaxy-bg.jsp" />
 	<div class="top-nav">
-		<a class="brand" href="${pageContext.request.contextPath}/home">NEBULA
-			STORE</a>
+		<a class="brand" href="${pageContext.request.contextPath}/home">NHỨT
+			THẠNH STORE</a>
 		<div class="nav-links">
 			<c:choose>
 				<c:when test="${sessionScope.account != null}">
+					<c:if test="${sessionScope.account.role == 'ADMIN'}">
+						<a href="${pageContext.request.contextPath}/admin/products">Quản
+							lý sản phẩm</a>
+					</c:if>
+					<span class="username-tag" style="color: var(--text-dim);">
+						${sessionScope.account.username}${sessionScope.account.role == 'ADMIN' ? ' (admin)' : ''}
+					</span>
 					<a href="${pageContext.request.contextPath}/logout">Đăng xuất</a>
 				</c:when>
 				<c:otherwise>
@@ -30,8 +37,7 @@
 	<div class="page-wrap">
 
 		<h1>Tất cả sản phẩm</h1>
-		<p class="tagline">Toàn bộ thiên thể hiện có trong thiên hà cửa
-			hàng.</p>
+		
 
 		<div class="card-grid">
 			<c:forEach var="p" items="${products}">
@@ -40,7 +46,7 @@
 					<c:choose>
 						<c:when test="${not empty p.images}">
 							<img class="thumb"
-								src="${pageContext.request.contextPath}/uploads/${p.images}" />
+								src="${pageContext.request.contextPath}/image?fname=${p.images}" />
 						</c:when>
 						<c:otherwise>
 							<div class="thumb-empty">Chưa có ảnh</div>

@@ -10,9 +10,9 @@
 <body>
 	<jsp:include page="/views/common/galaxy-bg.jsp" />
 	<div class="top-nav">
-		<a class="brand" href="${pageContext.request.contextPath}/home">NEBULA STORE</a>
+		<a class="brand" href="${pageContext.request.contextPath}/home">NHỨT THẠNH </a>
 		<div class="nav-links">
-			<a href="${pageContext.request.contextPath}/product">Xem cửa hàng</a>
+			<a href="${pageContext.request.contextPath}/product">Trở về cửa hàng</a>
 			<a href="${pageContext.request.contextPath}/logout">Đăng xuất</a>
 		</div>
 	</div>
@@ -20,7 +20,7 @@
 	<div class="page-wrap">
 
 		<h1>Quản lý sản phẩm</h1>
-		<p class="tagline">Bảng điều khiển trung tâm chỉ huy của quản trị viên.</p>
+		<p class="tagline"></p>
 
 		<a class="btn" href="${pageContext.request.contextPath}/admin/products?action=add">+ Thêm sản phẩm mới</a>
 
@@ -41,7 +41,7 @@
 						<td>
 							<c:choose>
 								<c:when test="${not empty p.images}">
-									<img class="thumb-sm" src="${pageContext.request.contextPath}/uploads/${p.images}" />
+									<img class="thumb-sm" src="${pageContext.request.contextPath}/image?fname=${p.images}" />
 								</c:when>
 								<c:otherwise>—</c:otherwise>
 							</c:choose>

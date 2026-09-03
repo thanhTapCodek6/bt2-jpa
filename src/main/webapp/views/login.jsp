@@ -12,7 +12,7 @@
 <body>
 	<jsp:include page="/views/common/galaxy-bg.jsp" />
 	<div class="top-nav">
-		<a class="brand" href="${pageContext.request.contextPath}/home">NEBULA
+		<a class="brand" href="${pageContext.request.contextPath}/home">NHỨT THẠNH 
 			STORE</a>
 		<div class="nav-links">
 			<a href="${pageContext.request.contextPath}/product">Sản phẩm</a> <a

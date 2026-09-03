@@ -10,7 +10,7 @@
 <body>
 	<jsp:include page="/views/common/galaxy-bg.jsp" />
 	<div class="top-nav">
-		<a class="brand" href="${pageContext.request.contextPath}/home">NEBULA STORE</a>
+		<a class="brand" href="${pageContext.request.contextPath}/home">NHỨT THẠNH</a>
 		<div class="nav-links">
 			<a href="${pageContext.request.contextPath}/login">Đăng nhập</a>
 		</div>

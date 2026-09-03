@@ -12,12 +12,19 @@
 <body>
 	<jsp:include page="/views/common/galaxy-bg.jsp" />
 	<div class="top-nav">
-		<a class="brand" href="${pageContext.request.contextPath}/home">NEBULA
-			STORE</a>
+		<a class="brand" href="${pageContext.request.contextPath}/home">NHỨT
+			THẠNH STORE</a>
 		<div class="nav-links">
 			<a href="${pageContext.request.contextPath}/product">Sản phẩm</a>
 			<c:choose>
 				<c:when test="${sessionScope.account != null}">
+					<c:if test="${sessionScope.account.role == 'ADMIN'}">
+						<a href="${pageContext.request.contextPath}/admin/products">Quản
+							lý sản phẩm</a>
+					</c:if>
+					<span class="username-tag" style="color: var(--text-dim);">
+						${sessionScope.account.username}${sessionScope.account.role == 'ADMIN' ? ' (admin)' : ''}
+					</span>
 					<a href="${pageContext.request.contextPath}/logout">Đăng xuất</a>
 				</c:when>
 				<c:otherwise>
@@ -40,7 +47,7 @@
 					<c:choose>
 						<c:when test="${not empty product.images}">
 							<img
-								src="${pageContext.request.contextPath}/uploads/${product.images}"
+								src="${pageContext.request.contextPath}/image?fname=${product.images}"
 								style="width: 100%; border-radius: 12px; border: 1px solid var(--border-glow);" />
 						</c:when>
 						<c:otherwise>

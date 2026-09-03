@@ -14,13 +14,19 @@
 	<jsp:include page="/views/common/galaxy-bg.jsp" />
 
 	<div class="top-nav">
-		<a class="brand" href="${pageContext.request.contextPath}/">NEBULA
-			STORE</a>
+		<a class="brand" href="${pageContext.request.contextPath}/">NHỨT
+			THẠNH STORE</a>
 		<div class="nav-links">
 			<a href="${pageContext.request.contextPath}/product">Sản phẩm</a>
 			<c:choose>
 				<c:when test="${sessionScope.account != null}">
-					<a href="${pageContext.request.contextPath}/">${sessionScope.account.username}</a>
+					<c:if test="${sessionScope.account.role == 'ADMIN'}">
+						<a href="${pageContext.request.contextPath}/admin/products">Quản
+							lý sản phẩm</a>
+					</c:if>
+					<span class="username-tag" style="color: var(--text-dim);">
+						${sessionScope.account.username}${sessionScope.account.role == 'ADMIN' ? ' (admin)' : ''}
+					</span>
 					<a href="${pageContext.request.contextPath}/logout">Đăng xuất</a>
 				</c:when>
 				<c:otherwise>
@@ -33,11 +39,10 @@
 
 	<div class="page-wrap">
 
-		<h1>Vũ trụ sản phẩm</h1>
-		<p class="tagline">Khám phá những thiên thể mới nhất vừa xuất hiện
-			trong thiên hà cửa hàng.</p>
+		<h1>Chào mừng quý khách đến cửa hàng</h1>
+		<p class="tagline">Rất hân hạnh được phục vụ quý khách !</p>
 
-		<h2>Mới xuất hiện</h2>
+		<h2>Các sản phẩm mới</h2>
 
 		<div class="card-grid">
 			<c:forEach var="p" items="${latestProducts}">
@@ -46,7 +51,7 @@
 					<c:choose>
 						<c:when test="${not empty p.images}">
 							<img class="thumb"
-								src="${pageContext.request.contextPath}/uploads/${p.images}" />
+								src="${pageContext.request.contextPath}/image?fname=${p.images}" />
 						</c:when>
 						<c:otherwise>
 							<div class="thumb-empty">Chưa có ảnh</div>

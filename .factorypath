@@ -1,4 +1,5 @@
 <factorypath>
+    <factorypathentry kind="VARJAR" id="M2_REPO/org/sitemesh/sitemesh/3.2.1/sitemesh-3.2.1.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/jakarta/servlet/jakarta.servlet-api/6.0.0/jakarta.servlet-api-6.0.0.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/jakarta/servlet/jsp/jstl/jakarta.servlet.jsp.jstl-api/3.0.0/jakarta.servlet.jsp.jstl-api-3.0.0.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/jakarta/el/jakarta.el-api/5.0.0/jakarta.el-api-5.0.0.jar" enabled="true" runInBatchMode="false"/>

@@ -105,11 +105,9 @@ public class ProductManageServlet extends HttpServlet {
 
 		// Xử lý upload ảnh (nếu người dùng có chọn file mới)
 		Part filePart = request.getPart("imageFile");
-		if (filePart != null && filePart.getSize() > 0) {
-			String savedFileName = FileUploadUtils.saveFile(filePart, Constants.UPLOAD_DIR);
-			if (savedFileName != null) {
-				product.setImages(savedFileName);
-			}
+		String savedFileName = FileUploadUtils.handleUpload(filePart, Constants.UPLOAD_DIR);
+		if (savedFileName != null) {
+		    product.setImages(savedFileName);
 		}
 
 		if (isNew) {

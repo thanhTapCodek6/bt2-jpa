@@ -44,4 +44,11 @@ public class FileUploadUtils {
 
 		return newFileName;
 	}
+	
+	public static String handleUpload(Part filePart, String uploadRealPath) throws IOException {
+		if (filePart != null && filePart.getSize() > 0) {
+			return saveFile(filePart, uploadRealPath);
+		}
+		return null; // không có file mới -> giữ ảnh cũ
+	}
 }

@@ -49,6 +49,12 @@ public class Account implements Serializable {
 
 	@Column(name = "FullName", columnDefinition = "nvarchar(100) null")
 	private String fullname;
+	
+	@Column(name = "Phone", columnDefinition = "varchar(20) null")
+	private String phone;
+	
+	@Column(name = "Images", columnDefinition = "nvarchar(500) null")
+	private String images;
 
 	@Column(name = "Role", columnDefinition = "nvarchar(20) not null default 'USER'")
 	private String role; // "ADMIN" hoặc "USER"

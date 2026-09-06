@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="jakarta.tags.core" prefix="c" %>
+<%@ taglib uri="jakarta.tags.fmt" prefix="fmt"%>
 <html>
 <head>
 <title>Quản lý sản phẩm</title>
@@ -33,7 +34,7 @@
 						</c:choose>
 					</td>
 					<td>${p.productname}</td>
-					<td>${p.price}</td>
+					<td><fmt:formatNumber value="${p.price}" type="number" groupingUsed="true" /> VNĐ</td>
 					<td>${p.quantity}</td>
 					<td>${p.category.categoryname}</td>
 					<td>${p.status == 1 ? 'Còn bán' : 'Ngừng bán'}</td>

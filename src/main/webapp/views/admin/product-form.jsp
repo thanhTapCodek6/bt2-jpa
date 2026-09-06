@@ -9,6 +9,10 @@
 
 	<h1>${product != null ? 'Sửa sản phẩm' : 'Thêm sản phẩm mới'}</h1>
 
+	<c:if test="${not empty error}">
+		<div class="msg-error">${error}</div>
+	</c:if>
+
 	<div class="panel" style="max-width: 600px;">
 		<form method="post"
 			action="${pageContext.request.contextPath}/admin/products"

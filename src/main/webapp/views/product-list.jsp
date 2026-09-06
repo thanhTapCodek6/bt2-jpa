@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="jakarta.tags.core" prefix="c"%>
+<%@ taglib uri="jakarta.tags.fmt" prefix="fmt"%>
 <html>
 <head>
 <title>Tất cả sản phẩm</title>
@@ -24,7 +25,7 @@
 				</c:choose>
 				<div class="info">
 					<div class="name">${p.productname}</div>
-					<div class="price">${p.price}</div>
+					<div class="price"><fmt:formatNumber value="${p.price}" type="number" groupingUsed="true" /> VNĐ</div>
 					<div class="cat">${p.category.categoryname}</div>
 				</div>
 			</a>

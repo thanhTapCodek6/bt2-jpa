@@ -16,6 +16,7 @@ import nhutthanh.vn.dao.impl.AccountDaoImpl;
 import nhutthanh.vn.entity.Account;
 import nhutthanh.vn.utils.Constants;
 import nhutthanh.vn.utils.FileUploadUtils;
+import nhutthanh.vn.utils.ValidationUtils;
 
 @WebServlet("/profile")
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 1024 * 1024 * 5, maxRequestSize = 1024 * 1024 * 5 * 5)
@@ -52,6 +53,18 @@ public class ProfileServlet extends HttpServlet {
 
 		String fullname = request.getParameter("fullname");
 		String phone = request.getParameter("phone");
+
+		if (fullname != null && fullname.length() > 100) {
+			request.setAttribute("error", "Họ tên không được vượt quá 100 ký tự.");
+			request.getRequestDispatcher("/views/profile.jsp").forward(request, response);
+			return;
+		}
+
+		if (!ValidationUtils.isValidPhone(phone)) {
+			request.setAttribute("error", "Số điện thoại không hợp lệ (phải gồm 10 số, bắt đầu bằng 0).");
+			request.getRequestDispatcher("/views/profile.jsp").forward(request, response);
+			return;
+		}
 
 		account.setFullname(fullname);
 		account.setPhone(phone);

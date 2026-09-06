@@ -59,6 +59,12 @@ public class LoginServlet extends HttpServlet {
 		String password = request.getParameter("password");
 		String rememberMe = request.getParameter("rememberMe");
 
+		if (username == null || username.isBlank() || password == null || password.isBlank()) {
+			request.setAttribute("error", "Vui lòng nhập đầy đủ username và mật khẩu.");
+			request.getRequestDispatcher("/views/login.jsp").forward(request, response);
+			return;
+		}
+
 		Account account = accountDao.findByUsername(username);
 
 		if (account == null || !account.getPassword().equals(password)) {

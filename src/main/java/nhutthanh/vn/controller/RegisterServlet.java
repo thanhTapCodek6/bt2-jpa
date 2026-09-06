@@ -15,6 +15,7 @@ import nhutthanh.vn.dao.impl.AccountDaoImpl;
 import nhutthanh.vn.entity.Account;
 import nhutthanh.vn.utils.MailUtils;
 import nhutthanh.vn.utils.OtpUtils;
+import nhutthanh.vn.utils.ValidationUtils;
 
 @WebServlet("/register")
 public class RegisterServlet extends HttpServlet {
@@ -52,6 +53,24 @@ public class RegisterServlet extends HttpServlet {
 		if (username == null || username.isBlank() || email == null || email.isBlank() || password == null
 				|| password.isBlank()) {
 			request.setAttribute("error", "Vui lòng nhập đầy đủ thông tin bắt buộc.");
+			request.getRequestDispatcher("/views/register.jsp").forward(request, response);
+			return;
+		}
+
+		if (!ValidationUtils.isValidUsername(username)) {
+			request.setAttribute("error", "Username phải có ít nhất 4 ký tự và không chứa khoảng trắng.");
+			request.getRequestDispatcher("/views/register.jsp").forward(request, response);
+			return;
+		}
+
+		if (!ValidationUtils.isValidEmail(email)) {
+			request.setAttribute("error", "Email không đúng định dạng.");
+			request.getRequestDispatcher("/views/register.jsp").forward(request, response);
+			return;
+		}
+
+		if (!ValidationUtils.isValidPassword(password)) {
+			request.setAttribute("error", "Mật khẩu phải có ít nhất 6 ký tự.");
 			request.getRequestDispatcher("/views/register.jsp").forward(request, response);
 			return;
 		}

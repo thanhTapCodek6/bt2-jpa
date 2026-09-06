@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="jakarta.tags.core" prefix="c"%>
+<%@ taglib uri="jakarta.tags.fmt" prefix="fmt"%>
 <html>
 <head>
 <title>Chi tiết sản phẩm</title>
@@ -30,9 +31,8 @@
 
 			<div style="flex: 1 1 320px;">
 				<h1>${product.productname}</h1>
-				<p class="price"
-					style="font-size: 22px; color: var(--amber); font-family: 'Orbitron', sans-serif;">
-					${product.price}</p>
+				<p class="price" style="font-size: 22px; color: var(--amber); font-family: 'Orbitron', sans-serif;">
+	<fmt:formatNumber value="${product.price}" type="number" groupingUsed="true" /> VNĐ</p>
 				<p class="cat" style="color: var(--text-dim);">Danh mục:
 					${product.category.categoryname}</p>
 				<p>Số lượng còn: ${product.quantity}</p>
@@ -41,7 +41,8 @@
 					${product.createdDate}</p>
 
 				<h3>Mô tả</h3>
-				<p>${product.description}</p>
+				<p style="white-space: pre-line;">${product.description}</p>
+				
 			</div>
 
 		</div>

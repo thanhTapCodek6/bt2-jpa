@@ -21,6 +21,7 @@ import nhutthanh.vn.entity.Category;
 import nhutthanh.vn.entity.Product;
 import nhutthanh.vn.utils.Constants;
 import nhutthanh.vn.utils.FileUploadUtils;
+import nhutthanh.vn.utils.ValidationUtils;
 
 @WebServlet("/admin/products")
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 1024 * 1024 * 5, maxRequestSize = 1024 * 1024 * 5 * 5)
@@ -84,30 +85,68 @@ public class ProductManageServlet extends HttpServlet {
 		String statusStr = request.getParameter("status");
 		String categoryIdStr = request.getParameter("categoryId");
 
-		Product product;
 		boolean isNew = (idParam == null || idParam.isBlank());
 
+		// --- Validate dữ liệu bắt buộc ---
+		if (productname == null || productname.isBlank()) {
+			forwardFormWithError(request, response, isNew, idParam, "Tên sản phẩm không được để trống.");
+			return;
+		}
+
+		if (productname.length() > 200) {
+			forwardFormWithError(request, response, isNew, idParam, "Tên sản phẩm không được vượt quá 200 ký tự.");
+			return;
+		}
+
+		Double price = parseDoubleSafe(priceStr);
+		if (!ValidationUtils.isPositive(price)) {
+			forwardFormWithError(request, response, isNew, idParam, "Giá sản phẩm phải là số lớn hơn 0.");
+			return;
+		}
+
+		Integer quantity = parseIntSafe(quantityStr);
+		if (!ValidationUtils.isNonNegative(quantity)) {
+			forwardFormWithError(request, response, isNew, idParam, "Số lượng phải là số nguyên không âm.");
+			return;
+		}
+
+		Integer status = parseIntSafe(statusStr);
+		if (status == null || (status != 0 && status != 1)) {
+			forwardFormWithError(request, response, isNew, idParam, "Trạng thái không hợp lệ.");
+			return;
+		}
+
+		Integer categoryId = parseIntSafe(categoryIdStr);
+		Category category = (categoryId != null) ? categoryDao.findById(categoryId) : null;
+		if (category == null) {
+			forwardFormWithError(request, response, isNew, idParam, "Vui lòng chọn danh mục hợp lệ.");
+			return;
+		}
+
+		Product product;
 		if (isNew) {
 			product = new Product();
 			product.setCreatedDate(LocalDateTime.now());
 		} else {
 			product = productDao.findById(Integer.parseInt(idParam));
+			if (product == null) {
+				forwardFormWithError(request, response, isNew, idParam, "Không tìm thấy sản phẩm để cập nhật.");
+				return;
+			}
 		}
 
 		product.setProductname(productname);
-		product.setPrice(Double.parseDouble(priceStr));
+		product.setPrice(price);
 		product.setDescription(description);
-		product.setQuantity(Integer.parseInt(quantityStr));
-		product.setStatus(Integer.parseInt(statusStr));
-
-		Category category = categoryDao.findById(Integer.parseInt(categoryIdStr));
+		product.setQuantity(quantity);
+		product.setStatus(status);
 		product.setCategory(category);
 
 		// Xử lý upload ảnh (nếu người dùng có chọn file mới)
 		Part filePart = request.getPart("imageFile");
 		String savedFileName = FileUploadUtils.handleUpload(filePart, Constants.UPLOAD_DIR);
 		if (savedFileName != null) {
-		    product.setImages(savedFileName);
+			product.setImages(savedFileName);
 		}
 
 		if (isNew) {
@@ -117,6 +156,41 @@ public class ProductManageServlet extends HttpServlet {
 		}
 
 		response.sendRedirect(request.getContextPath() + "/admin/products");
+	}
+
+	private Double parseDoubleSafe(String value) {
+		try {
+			return (value == null || value.isBlank()) ? null : Double.parseDouble(value);
+		} catch (NumberFormatException e) {
+			return null;
+		}
+	}
+
+	private Integer parseIntSafe(String value) {
+		try {
+			return (value == null || value.isBlank()) ? null : Integer.parseInt(value);
+		} catch (NumberFormatException e) {
+			return null;
+		}
+	}
+
+	private void forwardFormWithError(HttpServletRequest request, HttpServletResponse response, boolean isNew,
+			String idParam, String errorMessage) throws ServletException, IOException {
+
+		Product product = null;
+		if (!isNew) {
+			try {
+				product = productDao.findById(Integer.parseInt(idParam));
+			} catch (NumberFormatException ignored) {
+				// giữ product = null
+			}
+		}
+
+		var categories = categoryDao.findAll();
+		request.setAttribute("categories", categories);
+		request.setAttribute("product", product);
+		request.setAttribute("error", errorMessage);
+		request.getRequestDispatcher("/views/admin/product-form.jsp").forward(request, response);
 	}
 
 	private void showList(HttpServletRequest request, HttpServletResponse response)

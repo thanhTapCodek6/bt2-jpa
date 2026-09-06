@@ -14,6 +14,7 @@ import nhutthanh.vn.dao.impl.AccountDaoImpl;
 import nhutthanh.vn.entity.Account;
 import nhutthanh.vn.utils.MailUtils;
 import nhutthanh.vn.utils.OtpUtils;
+import nhutthanh.vn.utils.ValidationUtils;
 
 @WebServlet("/forgot-password")
 public class ForgotPasswordServlet extends HttpServlet {
@@ -109,7 +110,23 @@ public class ForgotPasswordServlet extends HttpServlet {
 			return;
 		}
 
-		if (newPassword == null || newPassword.isBlank() || !newPassword.equals(confirmPassword)) {
+		if (newPassword == null || newPassword.isBlank()) {
+			request.setAttribute("step", "reset");
+			request.setAttribute("username", username);
+			request.setAttribute("error", "Vui lòng nhập mật khẩu mới.");
+			request.getRequestDispatcher("/views/forgot-password.jsp").forward(request, response);
+			return;
+		}
+
+		if (!ValidationUtils.isValidPassword(newPassword)) {
+			request.setAttribute("step", "reset");
+			request.setAttribute("username", username);
+			request.setAttribute("error", "Mật khẩu mới phải có ít nhất 6 ký tự.");
+			request.getRequestDispatcher("/views/forgot-password.jsp").forward(request, response);
+			return;
+		}
+
+		if (!newPassword.equals(confirmPassword)) {
 			request.setAttribute("step", "reset");
 			request.setAttribute("username", username);
 			request.setAttribute("error", "Mật khẩu xác nhận không khớp.");

@@ -121,61 +121,8 @@ body {
 	max-width: 1100px;
 	margin: 0 auto;
 	padding: 32px 24px 64px;
-}
-
-.top-bar {
-	display: flex;
-	justify-content: flex-end;
-	align-items: center;
-	padding: 8px 24px;
-	background: rgba(13, 10, 23, 0.6);
-	border-bottom: 1px solid var(--border-glow);
-	font-size: 13px;
-}
-
-.top-bar a {
-	color: var(--text-dim);
-	text-decoration: none;
-	margin-left: 16px;
-	transition: color 0.2s;
-}
-
-.top-bar a:hover {
-	color: var(--gold-bright);
-}
-
-.main-nav {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	padding: 16px 24px;
-	border-bottom: 1px solid var(--border-glow);
-	background: linear-gradient(180deg, rgba(13, 10, 23, 0.9), rgba(13, 10, 23, 0.4));
-	backdrop-filter: blur(6px);
-	margin-bottom: 40px;
-}
-
-.main-nav .brand {
-	font-family: 'Orbitron', sans-serif;
-	font-weight: 800;
-	letter-spacing: 2px;
-	color: var(--gold-bright);
-	text-decoration: none;
-	font-size: 20px;
-	text-shadow: 0 0 12px rgba(255, 179, 71, 0.5);
-}
-
-.main-nav .nav-links a {
-	color: var(--text-dim);
-	text-decoration: none;
-	margin-left: 24px;
-	font-size: 14px;
-	letter-spacing: 0.5px;
-	transition: color 0.2s;
-}
-
-.main-nav .nav-links a:hover {
-	color: var(--gold-bright);
+	position: relative;
+	z-index: 1;
 }
 
 /* ===== TYPOGRAPHY ===== */
@@ -272,7 +219,7 @@ a {
 	margin-top: 4px;
 }
 
-/* ===== FORMS ===== */
+/* ===== FORMS (custom, không phải Bootstrap form) ===== */
 
 label, .field-label {
 	display: block;
@@ -286,30 +233,9 @@ label, .field-label {
 	margin-bottom: 18px;
 }
 
-input[type=text], input[type=password], input[type=email],
-input[type=number], input[type=file], textarea, select {
-	width: 100%;
-	padding: 11px 14px;
-	background: #0a0812;
-	border: 1px solid var(--border-glow);
-	border-radius: 8px;
-	color: var(--text-main);
-	font-family: 'Inter', sans-serif;
-	font-size: 14px;
-}
+/* ===== NÚT CUSTOM (đổi tên .btn -> .btn-galaxy để không đụng Bootstrap .btn) ===== */
 
-input:focus, textarea:focus, select:focus {
-	outline: none;
-	border-color: var(--gold);
-	box-shadow: 0 0 0 3px rgba(255, 179, 71, 0.12);
-}
-
-input[type=checkbox] {
-	accent-color: var(--gold);
-	margin-right: 8px;
-}
-
-.btn {
+.btn-galaxy {
 	display: inline-block;
 	padding: 11px 26px;
 	background: linear-gradient(135deg, var(--amber), var(--gold));
@@ -324,23 +250,24 @@ input[type=checkbox] {
 	transition: filter 0.2s, transform 0.15s;
 }
 
-.btn:hover {
+.btn-galaxy:hover {
 	filter: brightness(1.1);
 	transform: translateY(-1px);
+	color: #1a0f00;
 }
 
-.btn-outline {
+.btn-galaxy.btn-outline {
 	background: transparent;
 	border: 1px solid var(--border-glow);
 	color: var(--gold);
 }
 
-.btn-danger {
+.btn-galaxy.btn-danger {
 	background: linear-gradient(135deg, #c0392b, #e74c3c);
 	color: #fff;
 }
 
-.btn-small {
+.btn-galaxy.btn-small {
 	padding: 6px 14px;
 	font-size: 12px;
 }
@@ -455,25 +382,72 @@ tr:hover td {
 	margin-bottom: 28px;
 }
 
-.top-bar, .main-nav, .page-wrap {
+/* ===== BOOTSTRAP OVERRIDE - GALAXY THEME ===== */
+
+/* Navbar */
+.navbar {
+	padding: 16px 24px;
+	background: linear-gradient(180deg, rgba(13, 10, 23, 0.9), rgba(13, 10, 23, 0.4));
+	backdrop-filter: blur(6px);
+	border-bottom: 1px solid var(--border-glow);
 	position: relative;
-	z-index: 1;
+	z-index: 2;
 }
 
-/* ===== AVATAR DROPDOWN ===== */
-
-.avatar-menu {
-	position: relative;
-	display: inline-block;
-	margin-left: 24px;
+.navbar-brand {
+	font-family: 'Orbitron', sans-serif;
+	font-weight: 800;
+	letter-spacing: 2px;
+	color: var(--gold-bright) !important;
+	font-size: 20px;
+	text-shadow: 0 0 12px rgba(255, 179, 71, 0.5);
 }
 
-.avatar-btn {
+.navbar .nav-link {
+	color: var(--text-dim) !important;
+	font-size: 14px;
+	letter-spacing: 0.5px;
+}
+
+.navbar .nav-link:hover {
+	color: var(--gold-bright) !important;
+}
+
+.navbar-toggler {
+	border-color: var(--border-glow);
+}
+
+.username-tag {
+	color: var(--text-dim) !important;
+}
+
+/* Top bar (avatar dropdown) */
+.top-bar {
+	position: relative;
+	z-index: 3;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	padding: 8px 24px;
+	background: rgba(13, 10, 23, 0.6);
+	border-bottom: 1px solid var(--border-glow);
+	font-size: 13px;
+}
+
+.top-bar .btn {
+	padding: 6px 16px;
+	font-size: 13px;
+}
+
+.top-bar .dropdown-toggle {
 	background: none;
 	border: none;
 	padding: 0;
-	cursor: pointer;
-	display: block;
+}
+
+.top-bar .dropdown-toggle::after {
+	color: var(--text-dim);
+	margin-left: 8px;
 }
 
 .avatar-img {
@@ -500,41 +474,102 @@ tr:hover td {
 	border: 2px solid var(--border-glow);
 }
 
-.avatar-dropdown {
-	display: none;
-	position: absolute;
-	right: 0;
-	top: 48px;
-	min-width: 200px;
+.dropdown-menu {
 	background: linear-gradient(160deg, var(--bg-panel), var(--bg-panel-light));
 	border: 1px solid var(--border-glow);
-	border-radius: 10px;
-	box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
-	overflow: hidden;
-	z-index: 100;
+	min-width: 200px;
 }
 
-.avatar-dropdown.show {
-	display: block;
-}
-
-.avatar-dropdown-name {
-	padding: 12px 16px;
-	font-size: 13px;
-	color: var(--text-dim);
-	border-bottom: 1px solid var(--border-glow);
-}
-
-.avatar-dropdown a {
-	display: block;
-	padding: 12px 16px;
+.dropdown-item {
 	color: var(--text-main);
-	text-decoration: none;
 	font-size: 14px;
-	transition: background 0.2s;
 }
 
-.avatar-dropdown a:hover {
+.dropdown-item:hover, .dropdown-item:focus {
 	background: rgba(255, 179, 71, 0.08);
 	color: var(--gold-bright);
+}
+
+.dropdown-item-text {
+	color: var(--text-dim);
+	font-size: 13px;
+}
+
+/* Buttons Bootstrap thật (btn-warning, btn-outline-warning...) */
+.btn-warning, .btn-warning:hover {
+	background: linear-gradient(135deg, var(--amber), var(--gold));
+	border: none;
+	color: #1a0f00;
+	font-weight: 600;
+}
+
+.btn-outline-warning {
+	border-color: var(--border-glow);
+	color: var(--gold);
+}
+
+.btn-outline-warning:hover {
+	background: rgba(255, 179, 71, 0.1);
+	border-color: var(--gold);
+	color: var(--gold-bright);
+}
+
+.btn-outline-light {
+	border-color: var(--border-glow);
+	color: var(--text-dim);
+}
+
+.btn-outline-light:hover {
+	background: rgba(255, 179, 71, 0.1);
+	border-color: var(--gold);
+	color: var(--gold-bright);
+}
+
+/* Form controls chuẩn Bootstrap (form-control, form-select, form-check) */
+.form-control, .form-select {
+	background: #0a0812;
+	border: 1px solid var(--border-glow);
+	color: var(--text-main);
+}
+
+.form-control:focus, .form-select:focus {
+	background: #0a0812;
+	color: var(--text-main);
+	border-color: var(--gold);
+	box-shadow: 0 0 0 3px rgba(255, 179, 71, 0.12);
+}
+
+.form-label {
+	color: var(--text-dim);
+	font-size: 13px;
+}
+
+.form-check-input:checked {
+	background-color: var(--gold);
+	border-color: var(--gold);
+}
+
+/* Sidebar filter */
+.sidebar-filter {
+	background: linear-gradient(160deg, var(--bg-panel), var(--bg-panel-light));
+	border: 1px solid var(--border-glow);
+	border-radius: 14px;
+	padding: 20px;
+	margin: 20px;
+	height: fit-content;
+}
+
+.layout-with-sidebar {
+	display: flex;
+	align-items: flex-start;
+	gap: 0;
+}
+
+/* Footer */
+.site-footer {
+	position: relative;
+	z-index: 1;
+	color: var(--text-dim);
+	border-top: 1px solid var(--border-glow);
+	font-size: 13px;
 }

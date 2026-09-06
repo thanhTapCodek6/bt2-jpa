@@ -75,8 +75,8 @@
 				</select>
 			</div>
 
-			<button type="submit" class="btn">Lưu</button>
-			<a class="btn btn-outline"
+			<button type="submit" class="btn-galaxy">Lưu</button>
+			<a class="btn-galaxy btn-outline"
 				href="${pageContext.request.contextPath}/admin/products">Hủy</a>
 		</form>
 	</div>

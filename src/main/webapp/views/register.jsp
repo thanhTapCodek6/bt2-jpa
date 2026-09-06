@@ -46,7 +46,7 @@
 							<input type="password" name="confirmPassword" required />
 						</div>
 
-						<button type="submit" class="btn">Đăng ký</button>
+						<button type="submit" class="btn-galaxy">Đăng ký</button>
 					</form>
 				</c:when>
 
@@ -61,7 +61,7 @@
 							<input type="text" name="otp" required />
 						</div>
 
-						<button type="submit" class="btn">Xác nhận</button>
+						<button type="submit" class="btn-galaxy">Xác nhận</button>
 					</form>
 				</c:when>
 

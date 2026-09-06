@@ -1,13 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<script>
-	function toggleAvatarMenu() {
-		document.getElementById('avatarDropdown').classList.toggle('show');
-	}
-	window.addEventListener('click', function(e) {
-		if (!e.target.closest('.avatar-menu')) {
-			var dd = document.getElementById('avatarDropdown');
-			if (dd) dd.classList.remove('show');
-		}
-	});
-</script>
+<footer class="site-footer text-center py-4 mt-5">
+	<div class="container">
+		<small>&copy; 2026 Nhứt Thạnh Store</small>
+	</div>
+</footer>

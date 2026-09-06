@@ -30,7 +30,7 @@
 							<input type="text" name="username" required />
 						</div>
 
-						<button type="submit" class="btn">Gửi mã OTP</button>
+						<button type="submit" class="btn-galaxy">Gửi mã OTP</button>
 					</form>
 				</c:when>
 
@@ -53,7 +53,7 @@
 							<input type="password" name="confirmPassword" required />
 						</div>
 
-						<button type="submit" class="btn">Đặt lại mật khẩu</button>
+						<button type="submit" class="btn-galaxy">Đặt lại mật khẩu</button>
 					</form>
 				</c:when>
 

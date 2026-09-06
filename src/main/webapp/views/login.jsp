@@ -37,7 +37,7 @@
 						đăng nhập</label>
 				</div>
 
-				<button type="submit" class="btn">Đăng nhập</button>
+				<button type="submit" class="btn-galaxy">Đăng nhập</button>
 			</form>
 
 			<div class="auth-links">

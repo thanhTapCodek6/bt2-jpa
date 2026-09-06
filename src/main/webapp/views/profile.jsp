@@ -55,7 +55,7 @@
 				<input type="file" name="imageFile" accept="image/*" />
 			</div>
 
-			<button type="submit" class="btn">Lưu thay đổi</button>
+			<button type="submit" class="btn-galaxy">Lưu thay đổi</button>
 		</form>
 	</div>
 

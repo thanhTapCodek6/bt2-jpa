@@ -6,6 +6,10 @@
 <head>
 <meta charset="UTF-8">
 <title><sitemesh:write property="title" /></title>
+
+<!-- Bootstrap 5 CDN -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/assets/css/style.css">
 <sitemesh:write property="head" />
@@ -22,5 +26,8 @@
 	</div>
 
 	<%@ include file="/common/web/footer.jsp"%>
+
+	<!-- Bootstrap 5 JS bundle -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

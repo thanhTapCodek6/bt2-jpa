@@ -9,7 +9,7 @@
 
 	<h1>Quản lý sản phẩm</h1>
 
-	<a class="btn" href="${pageContext.request.contextPath}/admin/products?action=add">+ Thêm sản phẩm mới</a>
+	<a class="btn-galaxy" href="${pageContext.request.contextPath}/admin/products?action=add">+ Thêm sản phẩm mới</a>
 
 	<div class="panel" style="margin-top:24px;">
 		<table>
@@ -40,9 +40,9 @@
 					<td>${p.status == 1 ? 'Còn bán' : 'Ngừng bán'}</td>
 					<td style="font-size:12px; color:var(--text-dim);">${p.createdDate}</td>
 					<td>
-						<a class="btn btn-outline btn-small"
+						<a class="btn-galaxy btn-outline btn-small"
 							href="${pageContext.request.contextPath}/admin/products?action=edit&id=${p.productid}">Sửa</a>
-						<a class="btn btn-danger btn-small"
+						<a class="btn-galaxy btn-danger btn-small"
 							href="${pageContext.request.contextPath}/admin/products?action=delete&id=${p.productid}"
 							onclick="return confirm('Xác nhận xóa sản phẩm này?');">Xóa</a>
 					</td>

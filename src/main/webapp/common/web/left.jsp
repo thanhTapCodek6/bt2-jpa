@@ -5,24 +5,30 @@
 	<h3>Lọc theo</h3>
 
 	<form method="get" action="${pageContext.request.contextPath}/product">
-		<div class="field">
-			<label>Tên sản phẩm</label>
-			<input type="text" name="keyword" placeholder="Nhập tên sản phẩm..."
-				value="${param.keyword}" />
+		<div class="mb-3">
+			<label class="form-label">Tên sản phẩm</label>
+			<input type="text" class="form-control" name="keyword"
+				placeholder="Nhập tên sản phẩm..." value="${param.keyword}" />
 		</div>
 
-		<div class="field">
-			<label>Danh mục</label>
+		<div class="mb-3">
+			<label class="form-label">Danh mục</label>
 			<c:forEach var="cate" items="${allCategories}">
-				<label style="display:block; font-weight: normal; margin-bottom: 6px;">
-					<input type="checkbox" name="categoryId" value="${cate.categoryid}"
+				<div class="form-check">
+					<input class="form-check-input" type="checkbox"
+						name="categoryId" value="${cate.categoryid}"
+						id="cate${cate.categoryid}"
 						${categorySelected[cate.categoryid] ? 'checked' : ''} />
-					${cate.categoryname}
-				</label>
+					<label class="form-check-label" for="cate${cate.categoryid}">${cate.categoryname}</label>
+				</div>
 			</c:forEach>
 		</div>
 
-		<button type="submit" class="btn btn-small">Áp dụng</button>
-		<a class="btn btn-outline btn-small" href="${pageContext.request.contextPath}/product">Xóa lọc</a>
+		<div class="d-grid gap-2">
+			<button type="submit" class="btn btn-warning btn-sm">Áp
+				dụng</button>
+			<a class="btn btn-outline-warning btn-sm"
+				href="${pageContext.request.contextPath}/product">Xóa lọc</a>
+		</div>
 	</form>
 </div>
